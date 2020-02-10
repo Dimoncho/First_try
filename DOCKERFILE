@@ -1,0 +1,12 @@
+FROM tomcat
+RUN apt update
+RUN apt install maven -y
+RUN apt install git -y
+CMD mkdir project
+CMD cd /project
+CMD git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+CMD cd /project/boxfuse-sample-java-war-hello/
+CMD mvn package
+CMD cp /project/boxfuse-sample-java-war-hello/target/hello-1.0.war /var/lib/tomcat8/webapps/
+CMD service tomcat8 restart
+EXPOSE 8080
